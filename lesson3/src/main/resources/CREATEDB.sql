@@ -5,8 +5,7 @@ CREATE TABLE student
     birthday    DATE ,
     groupnumber INT    NOT NULL
 );
-ALTER TABLE student
-    alter column birthday set NOT NULL;
+
 
 CREATE TABLE subject
 (
@@ -14,7 +13,6 @@ CREATE TABLE subject
     name        VARCHAR(250),
     description VARCHAR(255),
     grade       int    NOT NULL,
-    check ( grade>=1 and grade<=5)
 );
 
 CREATE TABLE mark
@@ -26,12 +24,7 @@ CREATE TABLE mark
     foreign key (student_id) references student (id),
     foreign key (subject_id) references subject (id),
 );
-alter table mark
-    alter column student_id set not null ;
-alter table mark
-    alter column subject_id set not null ;
-UPDATE mark
-SET mark = LEAST(GREATEST(mark, 1), 10);
+
 
 
 CREATE TABLE paymenttype
@@ -39,8 +32,7 @@ CREATE TABLE paymenttype
     id   BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(45)
 );
-ALTER TABLE paymenttype
-    ADD CONSTRAINT constraint_name UNIQUE (name);
+
 
 CREATE TABLE payment
 (
@@ -53,9 +45,4 @@ CREATE TABLE payment
     foreign key (student_id) references student (id)
 );
 
-alter table payment
-    alter column type_id set not null ;
-alter table payment
-    alter column amount set not null ;
-alter table payment
-    alter column payment_date set not null ;
+
