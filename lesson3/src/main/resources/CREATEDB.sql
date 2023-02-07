@@ -6,7 +6,7 @@ CREATE TABLE student
     groupnumber INT    NOT NULL
 );
 ALTER TABLE student
-    MODIFY COLUMN birthday DATE NOT NULL;
+    alter column birthday set NOT NULL;
 
 CREATE TABLE subject
 (
@@ -20,29 +20,42 @@ CREATE TABLE subject
 CREATE TABLE mark
 (
     id         BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    student_id BIGINT not null,
-    subject_id BIGINT not null,
+    student_id BIGINT,
+    subject_id BIGINT,
     mark       INT,
     foreign key (student_id) references student (id),
     foreign key (subject_id) references subject (id),
 );
-
+alter table mark
+    alter column student_id set not null ;
+alter table mark
+    alter column subject_id set not null ;
 UPDATE mark
-SET mark = LEAST(GREATEST(mark, 1), 10)
+SET mark = LEAST(GREATEST(mark, 1), 10);
+
+
 CREATE TABLE paymenttype
 (
     id   BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(45) unique
+    name VARCHAR(45)
 );
+ALTER TABLE paymenttype
+    ADD CONSTRAINT constraint_name UNIQUE (name);
 
 CREATE TABLE payment
 (
     id           BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    type_id      BIGINT not null ,
-    amount       decimal not null ,
-    payment_date DateTime not null ,
+    type_id      BIGINT ,
+    amount       decimal  ,
+    payment_date DateTime ,
     student_id   BIGINT NOT NULL,
     foreign key (type_id) references paymenttype (id),
     foreign key (student_id) references student (id)
 );
 
+alter table payment
+    alter column type_id set not null ;
+alter table payment
+    alter column amount set not null ;
+alter table payment
+    alter column payment_date set not null ;
