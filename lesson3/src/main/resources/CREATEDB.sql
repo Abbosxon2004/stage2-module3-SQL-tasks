@@ -2,9 +2,12 @@ CREATE TABLE student
 (
     id          BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     name        VARCHAR(45),
-    birthday    DATE   not null,
+    birthday    DATE ,
     groupnumber INT    NOT NULL
 );
+ALTER TABLE student
+    MODIFY COLUMN birthday DATE NOT NULL;
+
 CREATE TABLE subject
 (
     id          BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -22,9 +25,10 @@ CREATE TABLE mark
     mark       INT,
     foreign key (student_id) references student (id),
     foreign key (subject_id) references subject (id),
-    check ( mark >= 1 and mark <= 10 )
 );
 
+UPDATE mark
+SET mark = LEAST(GREATEST(mark, 1), 10)
 CREATE TABLE paymenttype
 (
     id   BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
