@@ -2,7 +2,7 @@ CREATE TABLE student
 (
     id          BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     name        VARCHAR(45),
-    birthday    DATE ,
+    birthday    DATE,
     groupnumber INT    NOT NULL
 );
 
@@ -37,9 +37,9 @@ CREATE TABLE paymenttype
 CREATE TABLE payment
 (
     id           BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    type_id      BIGINT ,
-    amount       decimal  ,
-    payment_date DateTime ,
+    type_id      BIGINT,
+    amount       decimal,
+    payment_date DateTime,
     student_id   BIGINT NOT NULL,
     foreign key (type_id) references paymenttype (id),
     foreign key (student_id) references student (id)
