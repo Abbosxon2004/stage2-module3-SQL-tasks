@@ -1,6 +1,6 @@
 select * from student;
 
-select * from student order by random() limit 50;
+select TOP 50 * from student;
 
 select name from student;
 
