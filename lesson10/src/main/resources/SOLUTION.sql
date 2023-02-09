@@ -1,12 +1,3 @@
-select * from subject
-join(
-    select subject_id,avg(mark) as avg_mark from mark
-           where avg_mark>(select avg(mark) from mark)
-           group by subject_id
-) as filtered_subject on filtered_subject.subject_id=subject.id;
+SELECT s.id, s.name, s.description, s.grade FROM subject AS s JOIN mark AS m ON s.id = m.subject_id GROUP  BY (s.id) HAVING Avg(m.mark) > (SELECT Avg(mark) FROM mark);
 
-select * from student join(
-    select student_id,sum(amount) as sum_amount from payment
-           where sum_amount<(select avg(amount) from payment)
-           group by student_id
-) as filtered_payment on filtered_payment.student_id=student.id
+SELECT s.id, s.name FROM student AS s JOIN payment AS p ON s.id = p.student_id GROUP  BY (s.id) HAVING Avg(p.amount) < (SELECT Avg(amount) FROM payment);

@@ -1,12 +1,11 @@
-select * from mark where mark>6 order by mark desc;
+SELECT * FROM mark WHERE mark>6 ORDER BY mark DESC;
 
-select * from payment where amount<300 order by amount asc;
+SELECT * FROM payment WHERE amount<300 order by amount;
 
-select * from paymenttype order by name asc;
+SELECT * FROM paymenttype ORDER BY name;
 
-select * from student order by name desc;
+SELECT * FROM student order by name DESC ;
 
-select * from student
-inner join payment on(student.id=payment.student_id) where payment.amount>1000 having count(*)>=1 ORDER BY student.birthday asc;
+SELECT DISTINCT s.id,s.name,s.birthday,s.groupnumber FROM student AS s JOIN payment as p on s.id=p.student_id where p.amount>1000 ORDER BY s.birthday;
 
 
